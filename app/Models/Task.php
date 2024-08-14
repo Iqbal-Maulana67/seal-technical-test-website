@@ -15,5 +15,11 @@ class Task extends Model
         'task_description',
     ];
 
+    public $primaryKey = 'task_id';
     public $timestamps = false;
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,8 @@ Route::get('users', [UserController::class, 'api_view']);
 Route::post('users/create', [UserController::class, 'api_create']);
 Route::put('users/edit/{user}', [UserController::class, 'api_update']);
 Route::delete('users/delete/{user}', [UserController::class, 'api_delete']);
+
+Route::get('project', [ProjectController::class, 'api_view']);
+Route::post('project/create', [ProjectController::class, 'api_create']);
+Route::put('project/edit/{project}', [ProjectController::class, 'api_update']);
+Route::delete('project/delete/{project}', [ProjectController::class, 'api_delete']);

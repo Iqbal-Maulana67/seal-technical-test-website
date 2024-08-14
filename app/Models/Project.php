@@ -15,5 +15,11 @@ class Project extends Model
         'project_description',
     ];
 
+    public $primaryKey = 'project_id';
     public $timestamps = false;
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
