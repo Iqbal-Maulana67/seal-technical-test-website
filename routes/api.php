@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -21,17 +22,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('users', [UserController::class, 'api_view']);
-Route::post('users/create', [UserController::class, 'api_create']);
-Route::put('users/edit/{user}', [UserController::class, 'api_update']);
-Route::delete('users/delete/{user}', [UserController::class, 'api_delete']);
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('project', [ProjectController::class, 'api_view']);
-Route::post('project/create', [ProjectController::class, 'api_create']);
-Route::put('project/edit/{project}', [ProjectController::class, 'api_update']);
-Route::delete('project/delete/{project}', [ProjectController::class, 'api_delete']);
+Route::middleware('auth:sanctum')->get('users', [UserController::class, 'api_view']);
+Route::middleware('auth:sanctum')->post('users/create', [UserController::class, 'api_create']);
+Route::middleware('auth:sanctum')->put('users/edit/{user}', [UserController::class, 'api_update']);
+Route::middleware('auth:sanctum')->delete('users/delete/{user}', [UserController::class, 'api_delete']);
 
-Route::get('task', [TaskController::class, 'api_view']);
-Route::post('task/create', [TaskController::class, 'api_create']);
-Route::put('task/edit/{task}', [TaskController::class, 'api_update']);
-Route::delete('task/delete/{task}', [TaskController::class, 'api_delete']);
+Route::middleware('auth:sanctum')->get('project', [ProjectController::class, 'api_view']);
+Route::middleware('auth:sanctum')->post('project/create', [ProjectController::class, 'api_create']);
+Route::middleware('auth:sanctum')->put('project/edit/{project}', [ProjectController::class, 'api_update']);
+Route::middleware('auth:sanctum')->delete('project/delete/{project}', [ProjectController::class, 'api_delete']);
+
+Route::middleware('auth:sanctum')->get('task', [TaskController::class, 'api_view']);
+Route::middleware('auth:sanctum')->post('task/create', [TaskController::class, 'api_create']);
+Route::middleware('auth:sanctum')->put('task/edit/{task}', [TaskController::class, 'api_update']);
+Route::middleware('auth:sanctum')->delete('task/delete/{task}', [TaskController::class, 'api_delete']);
